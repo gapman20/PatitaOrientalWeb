@@ -91,10 +91,10 @@ const Inicio = () => {
             </div>
           </section>
         </div>
+      </section>
         <div className="col-md-12 mb-4">
         <TopProducts url= "/public/data/menu.json" />
         </div>
-      </section>
       
       
 
