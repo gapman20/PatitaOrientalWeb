@@ -14,7 +14,7 @@ Es donde se define qué valores estarán disponibles globalmente.
 */
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const apiurl = "http://localhost:8080/api/v1/users"; //Aqui cambias la variable de la url de la api
+  const apiurl = "https://patitaoriental-backend.duckdns.org/api/v1/users"; //Aqui cambias la variable de la url de la api
   const { uploadedUrl, setUploadedUrl } = useImageUpload();
   const [isLoggedIn, setIsLoggedIn] = useState(false); // crea un estado isLoggedIn que indica si el usuario está logueado (por defecto, false).
   const [usuario, setUsuario] = useState(() => {
