@@ -16,7 +16,11 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const apiurl = "https://patitaoriental-backend.duckdns.org/api/v1/users"; //Aqui cambias la variable de la url de la api
   const { uploadedUrl, setUploadedUrl } = useImageUpload();
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // crea un estado isLoggedIn que indica si el usuario está logueado (por defecto, false).
+  const [isLoggedIn, setIsLoggedIn] = useState({
+    // crea un estado isLoggedIn que indica si el usuario está logueado (por defecto, false).
+    logInStatus: false,
+    id_user: null,
+  });
   const [usuario, setUsuario] = useState(() => {
     //estado usuario almacena los datos del usuario (nombre, email, etc.) desde el localStorage. Si hay un usuario guardado, lo carga automáticamente al iniciar.
     const storedUser = localStorage.getItem("usuario");
@@ -71,8 +75,17 @@ export const AuthProvider = ({ children }) => {
     if (foundUser) {
       if (foundUser.password === logInInput.inputContraseña) {
         console.log("USUARIO ACEPTADO");
-        localStorage.setItem("usuario", JSON.stringify(foundUser)); // guardar usuario encontrado en local storage
-        setIsLoggedIn(true);
+
+        const nuevoEstado = {
+          logInStatus: true,
+          id_user: foundUser.id,
+        };
+
+        setIsLoggedIn(nuevoEstado);
+        localStorage.setItem("isLoggedIn", JSON.stringify(nuevoEstado));
+
+       // localStorage.setItem("usuario", JSON.stringify(foundUser)); // guardar usuario encontrado en local storage
+
         setUsuario(foundUser); // Aquí actualizas el contexto inmediatamente
         navigate("/Profile"); // redirigir a la página de perfil
         setLogInInput({
@@ -144,16 +157,13 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await fetch(
-        `${apiurl}/${usuarioActualizado.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(usuarioActualizado),
-        }
-      );
+      const response = await fetch(`${apiurl}/${usuarioActualizado.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(usuarioActualizado),
+      });
 
       if (!response.ok) {
         throw new Error(`Error en la petición: ${response.status}`);
@@ -171,30 +181,30 @@ export const AuthProvider = ({ children }) => {
   };
 
   const deleteUser = async () => {
-  try {
-    const usuarioGuardado = JSON.parse(localStorage.getItem("usuario"));
-    const response = await fetch(`${apiurl}/${usuarioGuardado.id}`, {
-      method: "DELETE",
-    });
+    try {
+      const usuarioGuardado = JSON.parse(localStorage.getItem("usuario"));
+      const response = await fetch(`${apiurl}/${usuarioGuardado.id}`, {
+        method: "DELETE",
+      });
 
-    if (!response.ok) {
-      throw new Error("Error al borrar el usuario");
+      if (!response.ok) {
+        throw new Error("Error al borrar el usuario");
+      }
+
+      // Limpiar el estado y el localStorage
+      localStorage.removeItem("usuario");
+      localStorage.setItem("isLoggedIn", "false");
+      setUsuario(null);
+      setIsLoggedIn(false);
+
+      // Redirigir al home o login
+      navigate("/InicioDeSesion");
+
+      console.log("Usuario eliminado correctamente");
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error);
     }
-
-    // Limpiar el estado y el localStorage
-    localStorage.removeItem("usuario");
-    localStorage.setItem("isLoggedIn", "false");
-    setUsuario(null);
-    setIsLoggedIn(false);
-
-    // Redirigir al home o login
-    navigate("/InicioDeSesion");
-
-    console.log("Usuario eliminado correctamente");
-  } catch (error) {
-    console.error("Error al eliminar usuario:", error);
-  }
-};
+  };
 
   //Este efecto se ejecuta una sola vez al cargar la app:
   useEffect(() => {

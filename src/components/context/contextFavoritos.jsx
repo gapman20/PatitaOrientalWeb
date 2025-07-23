@@ -10,6 +10,7 @@ const ContextProviderFavoriteProduct = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("favoritos", JSON.stringify(favorito));
+    
   }, [favorito]);
 
   return (

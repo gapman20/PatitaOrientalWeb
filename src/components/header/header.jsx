@@ -50,7 +50,7 @@ const Header = () => {
           </ul>
 
           <div className="iconos-movil">
-             {isLoggedIn && usuario?.imageUrl ? (
+             {isLoggedIn.logInStatus && usuario?.imageUrl ? (
             <Link onClick={toggleMenu} to="/Profile">
               <img className="imagen-Usuario-header" src={usuario.imageUrl} alt="Perfil" />
             </Link>
@@ -70,7 +70,7 @@ const Header = () => {
         </nav>
 
         <div className="iconos">
-          {isLoggedIn && usuario?.imageUrl ? (
+          {isLoggedIn.logInStatus && usuario?.imageUrl ? (
             <Link onClick={toggleMenu} to="/Profile">
               <img className="imagen-Usuario-header" src={usuario.imageUrl} alt="Perfil" />
             </Link>

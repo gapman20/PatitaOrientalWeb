@@ -90,7 +90,8 @@ const Carrito = () => {
     });
 };
 
-    const subtotal = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+    const subtotal = carrito.reduce((acc, p) => acc + p.priceProduct * p.cantidad, 0);
+    
     const envio = carrito.length > 0 ? 5.0 : 0;
     const total = subtotal + envio;
 

@@ -26,7 +26,13 @@ const Profile = () => {
 
   const cerrarSesionUsuario = () => {
     localStorage.removeItem("usuario");
-    setIsLoggedIn(false);
+    const nuevoEstado = {
+          logInStatus: false,
+          id_user: "",
+        };
+
+    setIsLoggedIn(nuevoEstado);
+    localStorage.setItem("isLoggedIn", JSON.stringify(nuevoEstado));
     setUploadedUrl("");
     navigate("/InicioDeSesion");
   };

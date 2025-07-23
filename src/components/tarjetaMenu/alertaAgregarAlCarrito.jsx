@@ -9,7 +9,7 @@ const alertaAgregarAlCarrito = (producto) =>{
                 Se agrego ${producto.name}.
             </p>
             <p style="font-size:14px;">
-                Cantidad: ${producto.cantidad}.
+                Cantidad: ${producto.cantidad}
             </p>
         `,
         icon: "success",
