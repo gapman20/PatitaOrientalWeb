@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import TarjetaMenu from "./tarjetaMenu";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import { useCartActions } from "../utils/botonDeAgregar";
 import "./tarjetaMenu.css";
 import { useFavorito } from "../utils/agregarAFavoritos";
@@ -68,7 +69,7 @@ useEffect(() => {
     fetchProducts();
   }, [url]);
 
-  if (loading) return <div>Cargando productos...</div>;
+  if (loading) return <LoadingScreen/>;
   if (error) return <div>Error: {error}</div>;
   if (!menuData.comidas) return <div>No hay datos disponibles</div>;
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Product_base_rest_api_url = 'http://localhost:8080/api/v1/products';
+const Product_base_rest_api_url = 'https://patitaoriental-backend.duckdns.org/api/v1/products';
 
 class ProductService {
   async getAllProducts() {

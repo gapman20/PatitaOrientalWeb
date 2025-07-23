@@ -35,7 +35,9 @@ const Menu = () => {
         <li><a className="filtro-btn" href="#postres">Postres</a></li>
       </ul>
 
-      <Products url="/data/menu.json" />
+     
+
+      <Products url='https://patitaoriental-backend.duckdns.org/api/v1/products' />
     </main>
   );
 };

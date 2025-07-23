@@ -1,12 +1,12 @@
 import Swal from "sweetalert2";
 
 const alertaAgregarAlCarrito = (producto) =>{
-    
+    console.log(producto);
     Swal.fire({
         title: " Se agrego al carrito 🛒",
         html: `
             <p style="font-size:16px; margin-bottom:10px;">
-                Se agrego ${producto.nombre}.
+                Se agrego ${producto.name}.
             </p>
             <p style="font-size:14px;">
                 Cantidad: ${producto.cantidad}.

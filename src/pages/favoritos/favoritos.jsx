@@ -3,7 +3,7 @@ import { contextFavoritos } from '../../components/context/contextFavoritos';
 import TarjetaMenu from "../../components/tarjetaMenu/tarjetaMenu";
 import { useCartActions } from '../../components/utils/botonDeAgregar';
 import './favoritos.css';
-import TarjetaMenuTematico from '../../components/tarjetaMenu/TarjetaMenuTematico';
+
 
 const Favoritos = () => {
 
@@ -26,22 +26,15 @@ const Favoritos = () => {
         <p>No tienes favoritos aún.</p>
       ) : (
         <div className="favoritos-grid">
-          {favorito.map(product => (
-            product.name ? (
+          {favorito.map(product =>  (
               <TarjetaMenu
                 key={product.id}
                 {...product}
                 onAddToCart={handleAddToCart}
                 onAddToFavorites={eliminarFavorito}
               />
-            ) : (
-              <TarjetaMenuTematico
-                key={product.id}
-                {...product}
-                onAddToCart={handleAddToCart}
-              />
-            )
-          ))}
+            ) 
+          )}
         </div>
       )}
     </div>
