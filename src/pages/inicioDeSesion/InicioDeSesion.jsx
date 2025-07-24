@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import gatitoConCorazones from "../../../public/images/logo-patita-oriental/gatitoConCorazones.png";
 import { useAuth } from "../../components/context/AuthContext";
 import Swal from "sweetalert2";
+import LoadingScreen from "../../components/LoadingScreen/LoadingScreen"
 import { createContext, useState, useContext, useEffect } from "react";
 
 import "./inicioDeSesion.css";
@@ -9,6 +10,8 @@ import "./inicioDeSesion.css";
 const InicioDeSesion = () => {
   const { logInInput, guardarLogInInput, logInCheck, setLogInInput } =
     useAuth();
+  const [loading, setLoading] = useState(false);
+
   //-------------------------------------Validaciones----------------
 
   const esEmailValido = (email) =>
@@ -38,7 +41,11 @@ const InicioDeSesion = () => {
 
   return (
     <>
+      {/* Loading */}
+            {loading && <LoadingScreen mensaje="Cargando Perfil..." />}
+
       <section className="registro-section" id="inicio-sesion">
+      
         <div className="gatitofoto-section">
           <img
             src={gatitoConCorazones}
@@ -72,14 +79,20 @@ const InicioDeSesion = () => {
             autoComplete="off"
             onSubmit={async (e) => {
               e.preventDefault();
+              setLoading(true); // ← Mostrar mensaje
               if ((await validarFormulario()) === true) {
-                const mensaje = await logInCheck(); // Esperamos que termine bien
+                const mensaje = await logInCheck();
+                setLoading(false); // ← Ocultar mensaje al terminar
+
                 mensaje === true
                   ? Swal.fire("Éxito", "¡Bienvenido!", "success")
                   : Swal.fire("Error", mensaje, "error");
+              } else {
+                setLoading(false); // ← Ocultar mensaje si validación falla
               }
             }}
           >
+            
             <h4 className="text-white mb-3 fw-bold  fs-1  mb-1 form-title titulo-registrarse">
               Inicia Sesión
             </h4>
@@ -119,7 +132,10 @@ const InicioDeSesion = () => {
               </button>
             </div>
 
-            <button type="submit" className="btn btn-pink w-100 fw-bold mx-auto d-block">
+            <button
+              type="submit"
+              className="btn btn-pink w-100 fw-bold mx-auto d-block"
+            >
               Ingresar
             </button>
             <h3

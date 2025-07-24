@@ -1,6 +1,8 @@
 import "./profile.css";
 import iconoEditarFoto from "../../../public/images/iconos/icon-editar-foto.svg";
 import iconoDireccion from "../../../public/images/iconos/icon-direccion.svg";
+import React, { useState, useEffect } from "react";
+import LoadingScreen from "../../components/LoadingScreen/LoadingScreen"
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../components/context/AuthContext";
@@ -11,7 +13,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const defaultProfilePicture =
     "https://res.cloudinary.com/dkufsisvv/image/upload/v1749665101/USER%20PRE-SET%20IMAGES%20DONT%20DELETE/hemsfcvyetspmc5d450i.svg";
-
+  
   const {
     isLoggedIn,
     setIsLoggedIn,
@@ -23,6 +25,10 @@ const Profile = () => {
   } = useAuth(); //de el contexto solo obtenemos si hay un usuario
   const { handleImageChange, uploading, uploadedUrl, setUploadedUrl } =
     useImageUpload();
+  if (!usuario) return <LoadingScreen mensaje="Cargando Perfil..." />;
+
+  console.log("usuario profile",usuario);
+  
 
   const cerrarSesionUsuario = () => {
     localStorage.removeItem("usuario");
@@ -153,10 +159,12 @@ const Profile = () => {
                   alt="foto de perfil"
                 />
               ) : (
+              
                 <img
                   className="foto-de-perfil"
                   src={
-                    usuario.imagen === ""
+                    
+                    usuario.imageUrl === ""
                       ? defaultProfilePicture
                       : usuario.imageUrl
                   } //Si el usuario no puso foto de perfil que se muestre la imagen for defecto

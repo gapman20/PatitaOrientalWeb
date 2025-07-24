@@ -3,11 +3,13 @@ import { useAuth } from "../../components/context/AuthContext";
 import { useImageUpload } from "../../components/context/uploadImagesContext";
 import Swal from "sweetalert2";
 import gatitoConCorazones from "../../../public/images/logo-patita-oriental/gatitoConCorazones.png";
+import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import iconoEditarFoto from "../../../public/images/iconos/icon-editar-foto.svg";
 import { createContext, useState, useContext, useEffect } from "react";
 import "./registro.css";
 
 const Registro = () => {
+  const [loading, setLoading] = useState(false);
   const {
     guardarInfoDeUsuarios,
     agregarUsuario,
@@ -88,11 +90,13 @@ const Registro = () => {
     }
 
     if (errores.length > 0) {
-      return Swal.fire({
+      Swal.fire({
         icon: "error",
         title: "Errores en el formulario",
         html: errores.map((e) => `<li>${e}</li>`).join(""),
       });
+
+      return false; // ← IMPORTANTE
     }
 
     return true; // Todo está validado correctamente
@@ -101,6 +105,8 @@ const Registro = () => {
   const [mostrarContrasena, setMostrarContrasena] = useState(false);
   return (
     <>
+      {/* Loading */}
+      {loading && <LoadingScreen mensaje="Creando Perfil..." />}
       <section className="registro-section">
         <div className="gatitofoto-section">
           <img
@@ -132,24 +138,24 @@ const Registro = () => {
           <form
             className="registroInicioSesion-form"
             id="contactForm"
+            autoComplete="off"
             onSubmit={async (e) => {
               e.preventDefault();
+              setLoading(true); // ← Mostrar mensaje
               if ((await validarFormulario()) === true) {
-                try {
-                  await agregarUsuario(); // Esperamos que termine bien
-                  Swal.fire("Éxito", "¡Bienvenido!", "success");
-                } catch (error) {
-                  Swal.fire(
-                    "Error",
-                    "Hubo un problema al guardar el usuario",
-                    "error"
-                  );
-                  console.error("Error al agregar usuario:", error);
-                }
+                const mensaje = await agregarUsuario();
+                setLoading(false); // ← Ocultar mensaje al terminar
+
+                mensaje === true
+                  ? Swal.fire("Éxito", "¡Bienvenido!", "success")
+                  : Swal.fire("Error", mensaje, "error");
+              } else {
+                await console.log("set loading has to be false");
+                setLoading(false); // ← Ocultar mensaje si validación falla
               }
             }}
           >
-            <div className="profile-picture-container mx-auto">
+            <div className="profile-picture-container">
               <div className="profile-picture ">
                 {uploading ? (
                   <div className="d-flex flex-column align-items-center loading">
@@ -164,6 +170,7 @@ const Registro = () => {
                   </div>
                 ) : (
                   <img
+                    className="foto-de-registro"
                     src={defaultProfilePicture}
                     alt="Default Profile Picture"
                   />
@@ -282,11 +289,14 @@ const Registro = () => {
                 </button>
               </div>
             </div>
-             
-            <button type="submit" className="btn btn-pink w-100 fw-bold mx-auto d-block">
+
+            <button
+              type="submit"
+              className="btn btn-pink w-100 fw-bold mx-auto d-block"
+            >
               Enviar
             </button>
-           
+
             <h3
               className="text-white"
               id="cambioDeRegistro-InicioSesion-mobile"
