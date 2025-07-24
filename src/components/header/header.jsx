@@ -12,7 +12,7 @@ const Header = () => {
   const [menuAbierto, setMenuAbierto] = useState(false);
   const [mostrarHeader, setMostrarHeader] = useState(true);
   const [ultimoScroll, setUltimoScroll] = useState(0);
-  const { isLoggedIn, usuario } = useAuth();
+  const { isLoggedIn, usuario,loading } = useAuth();
 
   const toggleMenu = () => setMenuAbierto(!menuAbierto);
   
@@ -31,7 +31,9 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [ultimoScroll]);
 
-   if (!usuario) return <LoadingScreen mensaje="Cargando Perfil..." />;
+   if (loading) {
+  return <LoadingScreen mensaje="Cargando Perfil..." />
+}
 
    
 

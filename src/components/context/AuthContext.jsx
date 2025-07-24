@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
     id_user: null,
   });
   const [usuario, setUsuario] = useState(null); // Inicialmente null
+  const [loading, setLoading] = useState(true); // nuevo estado
 
 useEffect(() => {
   const fetchUsuario = async () => {
@@ -44,6 +45,8 @@ useEffect(() => {
         }
       }
     }
+
+    setLoading(false); // <- aquí marcas que ya terminó de cargar
   };
 
   fetchUsuario();
@@ -263,6 +266,7 @@ useEffect(() => {
         isLoggedIn,
         setIsLoggedIn,
         usuario,
+        loading,
         getListaUsuarios,
         setUsuario,
         agregarUsuario,
