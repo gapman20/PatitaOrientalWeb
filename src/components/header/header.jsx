@@ -4,6 +4,7 @@ import patitaLogoAzul from "../../../public/images/logo-patita-oriental/PatitaOr
 import iconoDeUsuario from "../../../public/images/iconos/LogoUsr.svg";
 import iconoDeCorazon from "../../../public/images/iconos/LogoLove.svg";
 import iconoDeCarrito from "../../../public/images/iconos/LogoCart.svg";
+import LoadingScreen from "../../components/LoadingScreen/LoadingScreen"
 import { useAuth } from "../context/AuthContext";
 import "./header.css";
 
@@ -14,7 +15,7 @@ const Header = () => {
   const { isLoggedIn, usuario } = useAuth();
 
   const toggleMenu = () => setMenuAbierto(!menuAbierto);
-
+  
   useEffect(() => {
     const handleScroll = () => {
       const scrollActual = window.scrollY;
@@ -30,6 +31,12 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [ultimoScroll]);
 
+   if (!usuario) return <LoadingScreen mensaje="Cargando Perfil..." />;
+
+   
+
+  console.log("usuario header",usuario);
+  console.log("usuario.imageUrl", usuario?.imageUrl);
   return (
     <header className={mostrarHeader ? "visible" : "oculto"}>
       <div className="header-container">
@@ -40,6 +47,7 @@ const Header = () => {
         <button className="hamburguesa" onClick={toggleMenu}>
           ☰
         </button>
+       
 
         <nav className={`nav-menu ${menuAbierto ? "activo" : ""}`}>
           <ul className="navegacion">

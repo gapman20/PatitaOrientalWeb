@@ -1,6 +1,6 @@
 import './LoadingScreen.css';
 
-const LoadingScreen = () => {
+const LoadingScreen = ({mensaje}) => {
   return (
     <div className="loading-container">
       <div className="loading-cat">
@@ -24,7 +24,7 @@ const LoadingScreen = () => {
     </div>
 </div>
 
-      <p className="loading-text">Cargando productos...</p>
+      <p className="loading-text">{mensaje}</p>
     </div>
   );
 };

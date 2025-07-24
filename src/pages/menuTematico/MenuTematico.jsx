@@ -94,7 +94,7 @@ return (
 
     {/* Show loading below the banner */}
     {loading ? (
-      <LoadingScreen />
+      <LoadingScreen mensaje="Cargando Menú Temático..." />
     ) : error ? (
       <div>Error: {error}</div>
     ) : paquetes.length === 0 ? (

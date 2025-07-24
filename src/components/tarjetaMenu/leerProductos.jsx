@@ -69,7 +69,7 @@ useEffect(() => {
     fetchProducts();
   }, [url]);
 
-  if (loading) return <LoadingScreen/>;
+  if (loading) return <LoadingScreen mensaje="Cargando Menú..." />;
   if (error) return <div>Error: {error}</div>;
   if (!menuData.comidas) return <div>No hay datos disponibles</div>;
 

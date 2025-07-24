@@ -21,11 +21,39 @@ export const AuthProvider = ({ children }) => {
     logInStatus: false,
     id_user: null,
   });
-  const [usuario, setUsuario] = useState(() => {
-    //estado usuario almacena los datos del usuario (nombre, email, etc.) desde el localStorage. Si hay un usuario guardado, lo carga automáticamente al iniciar.
-    const storedUser = localStorage.getItem("usuario");
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+  const [usuario, setUsuario] = useState(null); // Inicialmente null
+
+useEffect(() => {
+  const fetchUsuario = async () => {
+    const stored = localStorage.getItem("isLoggedIn");
+
+    if (stored) {
+      const { logInStatus, id_user } = JSON.parse(stored);
+
+      if (logInStatus && id_user) {
+        try {
+          const response = await fetch(`${apiurl}/${id_user}`);
+          if (!response.ok) throw new Error("No se pudo obtener el usuario");
+
+          const userData = await response.json();
+          setUsuario(userData);
+          setIsLoggedIn({ logInStatus: true, id_user });
+          localStorage.setItem("usuario", JSON.stringify(userData));
+        } catch (error) {
+          console.error("Error al obtener el usuario:", error);
+        }
+      }
+    }
+  };
+
+  fetchUsuario();
+}, []);
+
+
+
+
+
+  
   const [logInInput, setLogInInput] = useState({
     //para el inicio de sesion de formulario
     inputEmail: "",
@@ -110,9 +138,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const agregarUsuario = async () => {
-    const usuarioArr = await getListaUsuarios();
     nuevoUsuario.imageUrl = uploadedUrl; //añadimos la url de la imagen
-
+    try{
     const res = await fetch(apiurl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -121,9 +148,16 @@ export const AuthProvider = ({ children }) => {
 
     if (res.ok) {
       const data = await res.json(); // API responde con los datos del usuario
-      localStorage.setItem("usuario", JSON.stringify(data)); // guardar usuario en local storage
-      setIsLoggedIn(true);
-      setUsuario(data); // Aquí actualizas el contexto inmediatamente
+      setUsuario(data); // actualizas el contexto inmediatamente
+
+      const nuevoEstado = {
+          logInStatus: true,
+          id_user: data.id,
+        };
+
+        setIsLoggedIn(nuevoEstado);
+        localStorage.setItem("isLoggedIn", JSON.stringify(nuevoEstado));
+
       setNuevoUsuario({
         //para el registro de usuarioformulario
         name: "",
@@ -141,10 +175,23 @@ export const AuthProvider = ({ children }) => {
       });
       navigate("/Profile"); // redirigir a la página de perfil
       setUploadedUrl(""); //limpiar url de imagen
+      return true;
     } else {
       console.log("Hubo un error al registrar");
-      return localStorage.setItem("isLoggedIn", "false");
+      const nuevoEstado = {
+          logInStatus: false,
+          id_user: "",
+        };
+
+        setIsLoggedIn(nuevoEstado);
+        localStorage.setItem("isLoggedIn", JSON.stringify(nuevoEstado));
+       return  false;
+     
     }
+  }catch (error) {
+  console.error("Error en agregarUsuario:", error);
+  return false; // ← AÑADE ESTO PARA SEGURIDAD
+}
   };
 
   const uptadeUser = async () => {
@@ -206,17 +253,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  //Este efecto se ejecuta una sola vez al cargar la app:
-  useEffect(() => {
-    const usuarioGuardado = JSON.parse(localStorage.getItem("usuario")); //Recupera los datos del usuario desde localStorage.
-    const estadoLogin = localStorage.getItem("isLoggedIn") === "true";
-
-    if (usuarioGuardado && estadoLogin) {
-      //Si encuentra que isLoggedIn es "true" y hay un usuario, los pone en los estados (setIsLoggedIn y setUsuario).
-      setIsLoggedIn(true);
-      setUsuario(usuarioGuardado);
-    }
-  }, []);
+  
 
   /*Aquí se entregan los valores (isLoggedIn, usuario, y sus funciones para actualizar) 
   a cualquier componente que consuma este contexto. */
