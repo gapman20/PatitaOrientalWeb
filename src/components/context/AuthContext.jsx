@@ -221,7 +221,7 @@ useEffect(() => {
 
       const data = await response.json();
       setUsuario(data);
-      localStorage.setItem("usuario", JSON.stringify(data));
+      //localStorage.setItem("usuario", JSON.stringify(data));
       setUploadedUrl(""); // limpiar la imagen subida
 
       console.log("Usuario actualizado con éxito:", data);

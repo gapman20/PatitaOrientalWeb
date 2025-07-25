@@ -1,49 +1,73 @@
 
 .banner-section {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/public/images/inicio/banner.png');
+  background:url('/public/images/inicio/banner.png');  
   background-size: cover;
-  background-position: center;
+   background-color: white;
+  outline: none;
   background-repeat: no-repeat;
   position: relative;
-  height: 400px;
+  height: 380px;
   padding-left: 0 !important;
   display: flex;
   align-items: center;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
 }
 
 .banner-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.8);
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
+  background: rgba(255, 255, 255, 0.964);
+  border-top-right-radius: 120px;
+  border-bottom-right-radius: 120px;
   margin-top: 0; 
   margin-bottom: 0;
   padding: 30px;
-  max-width: 650px;
-}
-
-
-.about-section {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 80px;
   max-width: 1000px;
-  padding: 40px 20px;
-  padding-left: 20px;
-  text-align: justify;
+  .first-text{
+    font-size:43px;
+  }
+  h1{
+    margin-left: 8rem;
+    margin-right: 6rem;
+    font-weight: 500;
+    font-size:50px;
+  }
 }
+
+.sobreNosotros{
+  display: flex;
+  justify-content: center;
+  text-align: justify;
+  align-items: center;
+  padding: 2rem 5rem;
+  
+  .logo-img{
+    width: 230px;
+  }
+}
+
+
 
 .advantages-section {
   background: #425184;
   border-radius: 100px;
-  max-width: 1300px;
-  padding: 40px 20px;
+  width: 95%;
+  padding: 60px 20px;
   align-items: center;
 }
 
+.platillos-mas-vendidos{
+  display: flex;
+  flex-direction: column;
+  justify-content:right;
+}
+
 .tematica-section {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/public/images/inicio/black-pink-imagen.jpg');
+  background: url('/public/images/inicio/black-pink-imagen.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -52,9 +76,9 @@
 }
 
 .tematica-text {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.959);
   border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
+  border-bottom-left-radius: 100px; 
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   margin-top: 20px;
@@ -62,13 +86,14 @@
   margin-right: 0;
   max-width: 700px;
   padding-left: 30px;
-  padding-right: 30px;
+  padding-right: 8rem;
 }
 
 
 .btn-pink {
   background-color: #e89bb7;
   color: white;
+  font-weight: 500;
   border: none;
   padding: 10px 30px;
   font-size: 16px;
@@ -77,11 +102,32 @@
   max-width: 220px;
   text-align: center;
   display: block;
+  margin-left: 8rem;
 }
 
+.btn-pink-about{
+  background-color: var(--secondary-color);;
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 10px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  width: auto;
+  max-width: 300px;
+  text-align: center;
+  display: block;
+  margin-top: 1rem;
+}
+
+.btn-pink-about:hover{
+  background-color: #934f6a;
+  color: white;
+}
 
 .btn-pink:hover {
-  background-color: #d87aa0;
+  background-color: #934f6a;
+  color: white;
 }
 
 .icon {
@@ -93,21 +139,23 @@
     width: 30px;
     height: 25px;
 }
+
+
 /* --------------------------------------------------------------------------- */
 /* Decorative lines styles */
 .decorative-lines-inicio {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 1rem 0;
-  gap: 0.5rem;
+  
+  gap: .4rem;
   width: 100%;
+  position: relative;
+  bottom: 12px;
 }
 
 .line-group-inicio {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  align-items: end;
   width: 100%;
   padding: 0 1rem;
 }
@@ -128,22 +176,48 @@
 
 .short-inicio {
   width: 10%;
+  height: 14px;
+  min-width: 50px;
+}
+
+.supershort-inicio{
+  width: 5%;
+  height: 14px;
   min-width: 50px;
 }
 
 .medium-inicio {
   width: 20%;
+   height: 14px;
+  margin-left: 2%;
+  min-width: 80px;
+}
+
+.mediumlong-inicio{
+   width: 25%;
+    height: 14px;
+   margin-right: 2%;
   min-width: 80px;
 }
 
 .long-inicio {
-  width: 30%;
+  width: 40%;
+  margin-left: 20%;
+ height: 14px;
+  min-width: 100px;
+}
+
+.platillos-line{
+   width: 25rem;
+ height: 10px;
   min-width: 100px;
 }
 
 .extra-long-inicio {
-  width: 50%;
+  width: 66%;
+  height: 20px;
   min-width: 150px;
+  margin-left: 4%;
 }
 
 .space-inicio {
@@ -154,4 +228,85 @@
 
 .Linkto{
   text-decoration: none;
+}
+
+/*-------------Media query-------------------*/
+@media screen and (max-width: 800px) {
+  .banner-section {
+  background-size: cover;
+   background-color: white;
+  outline: none;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 288px;
+  padding-left: 0 !important;
+  display: flex;
+  align-items: center;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+  .banner-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.964);
+  border-top-right-radius: 120px;
+  border-bottom-right-radius: 120px;
+  margin-top: 0; 
+  margin-bottom: 0;
+  padding: 29px;
+  max-width: 1000px;
+  .first-text{
+    
+    font-size:29px;
+  }
+  h1{
+
+    margin-left: 0rem;
+    margin-right: 2rem;
+    font-weight: 500;
+    font-size:25px;
+  }
+}
+
+
+.btn-pink {
+  background-color: #e89bb7;
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 10px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  width: auto;
+  max-width: 220px;
+  text-align: center;
+  display: block;
+  margin-left: 0rem;
+  margin-top: 13px;
+}
+
+.sobreNosotros{
+  display: flex;
+  justify-content: center;
+  text-align: justify;
+  align-items: center;
+  padding: .5rem 1rem;
+  .logo-section{
+img{
+    width: 180px;
+  }
+  }
+  
+}
+
+.titulo-sobre-nosotros{
+  h3{
+    padding-top: 1.5rem;
+font-size: 23px;
+  }
+  
+}
 }

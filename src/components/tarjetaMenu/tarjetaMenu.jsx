@@ -9,6 +9,7 @@ import { useFavorito } from '../utils/agregarAFavoritos';
 const TarjetaMenu = ({ imageUrl, name, priceProduct, description, onAddToCart, id, onAddToFavorites }) => {
   const [count, setCount] = useState(1);
   const { toggleFavorite, isFavorito } = useFavorito();
+  const [modalAbierto, setModalAbierto] = useState(false);
   const esFavorito = isFavorito(id);
 
   const handleIncrement = () => {
@@ -20,9 +21,10 @@ const TarjetaMenu = ({ imageUrl, name, priceProduct, description, onAddToCart, i
   };
 
   return (
+    <>
     <div className="contenedor-tarjeta-menu">
       <div className="contenedor-producto">
-        <img src={imageUrl} alt={`imagen de ${name}`} />
+        <img src={imageUrl} alt={`imagen de ${name}`} id="imagen-producto" onClick={() => setModalAbierto(true)}/>
         <div className="contenedor-info-producto">
           <h1 className="titulo-comida">{name}</h1>
           <h3 className="precio-comida">${priceProduct}.00 Mx</h3>
@@ -48,6 +50,29 @@ const TarjetaMenu = ({ imageUrl, name, priceProduct, description, onAddToCart, i
         </button>
       </div>
     </div>
+
+    {modalAbierto && (
+        <div className="modal d-block" tabIndex="-1" role="dialog" onClick={() => setModalAbierto(false)}>
+          <div className="modal-dialog modal-dialog-centered" role="document" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-content">
+              
+              <div className="modal-body text-center">
+                <img src={imageUrl} alt={name} className="img-fluid" />
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary btnCerrarModal"
+                  onClick={() => setModalAbierto(false)}
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

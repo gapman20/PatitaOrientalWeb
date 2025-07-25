@@ -15,8 +15,10 @@
 /* --- Sección Historia --- */
 .history-timeline {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  gap: 60px;
+  gap: 0px;
   background-color: var(--color-blanco);
   padding: 40px 20px;
 }
@@ -28,6 +30,7 @@
 .history-content {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
 }
@@ -41,14 +44,14 @@
 }
 
 .history-image img {
-  width: 400px;
+  width: 320px;
   border-radius: 20px;
   object-fit: cover;
   box-shadow: 0 8px 15px rgb(64 80 132 / 0.3);
 }
 
 .history-timeline h2 {
-  font-size: 40px;
+  font-size: 30px;
   color: var(--color-principal);
   text-align: center;
   margin-bottom: 20px;
@@ -60,14 +63,14 @@
 }
 
 .history-text h3 {
-  font-size: 50px;
+  font-size: 30px;
   color: var(--color-principal);
   margin-bottom: 10px;
-  text-align: center;
+  text-align: start;
 }
 
 .history-text p {
-  font-size: 30px;
+  font-size: 20px;
   color: var(--color-texto);
   line-height: 1.6;
   text-align: justify;
@@ -94,21 +97,16 @@
 }
 
 .carousel-title {
-  font-size: 42px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
   color: var(--color-blanco);
-  border-bottom: 6px solid var(--color-acento);
-  width: fit-content;
-  border-radius: 10%;
-  display: inline-block;
-  padding-bottom: 8px;
-  margin-bottom: 30px;
-  margin-left: 2rem;
-  font-weight: 700;
-  font-family: var(--fuente-principal);
+ margin-bottom: 2rem;
+  
 }
 
 .carousel-container {
-  width: 95%;
+  width: 90%;
   max-width: 1100px;
   margin: 0 auto 60px;
   background: var(--color-blanco);
@@ -134,9 +132,9 @@
 }
 
 .dev-image {
-  width: 400px;
-  height: 400px;
-  border-radius: 80%;
+  width: 250px;
+  height: auto;
+  border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1.2rem;
   box-shadow: 0 5px 12px rgba(11, 3, 8, 0.8);
@@ -149,7 +147,7 @@
 
 .carousel-card h3 {
   font-weight: 800;
-  font-size: 2.2rem;
+  font-size: 2rem;
   margin-bottom: 0.5rem;
   color: var(--color-acento);
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
@@ -157,7 +155,7 @@
 }
 
 .carousel-card p {
-  font-size: 1.6rem;
+  font-size: 1rem;
   margin: 0.3rem 0;
   line-height: 1.5;
   color: var(--color-principal);

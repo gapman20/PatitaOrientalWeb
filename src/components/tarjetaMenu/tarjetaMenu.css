@@ -23,6 +23,15 @@
   padding-left: 0.3rem;
 }
 
+.modal {
+  background-color: rgba(35, 4, 48, 0.308);
+  z-index: 1050;
+}
+
+.btnCerrarModal{
+  background-color: var(--color-rosa);
+  border-style: none;
+}
 
 
 .titulo-comida h1 {
