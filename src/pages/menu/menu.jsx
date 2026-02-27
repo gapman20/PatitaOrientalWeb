@@ -37,7 +37,7 @@ const Menu = () => {
 
      
 
-      <Products url='https://patitaoriental-backend.duckdns.org/api/v1/products' />
+      <Products url='https://patitaorientalbackend-production.up.railway.app/api/v1/products' />
     </main>
   );
 };

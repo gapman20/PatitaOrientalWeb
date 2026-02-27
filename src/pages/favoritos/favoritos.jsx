@@ -25,7 +25,7 @@ const Favoritos = () => {
 
     const fetchFavorites = async () => {
       try {
-        const response = await fetch(`https://patitaoriental-backend.duckdns.org/api/v1/users/${userData.id_user}`);
+        const response = await fetch(`https://patitaorientalbackend-production.up.railway.app/api/v1/users/${userData.id_user}`);
         if (!response.ok) throw new Error("Error al obtener favoritos");
 
         const data = await response.json();

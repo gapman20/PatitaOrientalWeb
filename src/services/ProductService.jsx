@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Product_base_rest_api_url = 'https://patitaoriental-backend.duckdns.org/api/v1/products';
+const Product_base_rest_api_url = 'https://patitaorientalbackend-production.up.railway.app/api/v1/products';
 
 class ProductService {
   async getAllProducts() {

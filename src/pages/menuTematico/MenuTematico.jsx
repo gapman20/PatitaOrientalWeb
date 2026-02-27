@@ -33,7 +33,7 @@ const MenuTematico = () => {
     useEffect(() => {
         const fetchMenuTematico = async () => {
             try {
-                const response = await fetch('https://patitaoriental-backend.duckdns.org/api/v1/products'); // Reemplaza con tu endpoint
+                const response = await fetch('https://patitaorientalbackend-production.up.railway.app/api/v1/products'); // Reemplaza con tu endpoint
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
                 }

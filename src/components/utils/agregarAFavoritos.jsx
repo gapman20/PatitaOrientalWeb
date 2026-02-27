@@ -30,7 +30,7 @@ export const useFavorito = () => {
     try {
       if (exists) {
         // 🔴 Eliminar del backend
-        await fetch(`https://patitaoriental-backend.duckdns.org/api/v1/users/${userId}/favorites/${productId}`, {
+        await fetch(`https://ppatitaorientalbackend-production.up.railway.app/api/v1/users/${userId}/favorites/${productId}`, {
           method: 'DELETE',
         });
 
@@ -47,8 +47,8 @@ export const useFavorito = () => {
         setFavorite((prev) => prev.filter((item) => item.id !== productId));
       } else {
         // 💖 Agregar al backend
-        await console.log(`https://patitaoriental-backend.duckdns.org/api/v1/users/${userId}/favorites/${productId}`);
-        await fetch(`https://patitaoriental-backend.duckdns.org/api/v1/users/${userId}/favorites/${productId}`, {
+        await console.log(`https://patitaorientalbackend-production.up.railway.app/api/v1/users/${userId}/favorites/${productId}`);
+        await fetch(`https://patitaorientalbackend-production.up.railway.app/api/v1/users/${userId}/favorites/${productId}`, {
           method: 'PUT',
         });
 
